@@ -16,6 +16,7 @@ public class Consultador {
 	private static String charset = "UTF-8";  // Or in Java 7 and later, use the constant: java.nio.charset.StandardCharsets.UTF_8.name()
 	private static String param1 ;//= "London";
 	private static String param2 = "d34e7ff512cceea4291f3629809e9b52";
+	private static final long serialVersionUID = -231512405473655759L;
 	
 	public static Clima consultar (int id) {
 		InputStream response = null;
