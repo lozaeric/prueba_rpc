@@ -1,3 +1,3 @@
-# prueba_rpc
+# Java RMI
 
-prueba rpc clima
+RMI usando la API de OpenWeather
