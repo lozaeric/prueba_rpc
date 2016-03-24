@@ -1,21 +1,29 @@
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 
 public class OpenWeatherImp extends UnicastRemoteObject implements OpenWeather {
-
-	public static Consultador c;
 	private static ArrayList<Ciudad> ciudades = new ArrayList<Ciudad>();
 	private static final long serialVersionUID = -231512405473655756L;
 
 	protected OpenWeatherImp() throws RemoteException {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public  void agregarCiudad (Ciudad c) throws RemoteException {
 		ciudades.add (c);
+		Collections.sort(ciudades, new Comparator<Ciudad>() {
+		    public int compare(Ciudad c1, Ciudad c2) {
+		        return c1.getNombre ().compareTo(c2.getNombre());
+		    }
+		});
+	}
+	
+	public  ArrayList <Ciudad> getCiudades () throws RemoteException {
+		return ciudades;
 	}
 	
 	public  String verCiudades () throws RemoteException {
@@ -29,7 +37,7 @@ public class OpenWeatherImp extends UnicastRemoteObject implements OpenWeather {
 		return mostrar.toString();
 	}
 	
-	public String consultarClima (int id) throws RemoteException {
+	public Clima consultarClima (int id) throws RemoteException {
 		Ciudad c = null;
 		
 		for (Ciudad cada : ciudades) {
@@ -37,8 +45,8 @@ public class OpenWeatherImp extends UnicastRemoteObject implements OpenWeather {
 				c = cada;
 		}
 		if (c==null)
-			return "ID erronea";
-		return c.obtenerClima().toString();
+			return null;
+		return c.obtenerClima ();
 	}
 	/*
 	public static void main(String[] args) {

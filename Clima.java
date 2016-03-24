@@ -1,34 +1,36 @@
 import java.io.Serializable;
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
+import java.util.Date;
 
 
 public class Clima implements Serializable {
-	private boolean estaCacheada = false;
-	private double temperatura;
+	private Date ultimaCache;
+	private float temperatura;
 	private String descripcion;
 	private static final long serialVersionUID = -231512405473655758L;
 	
-	public Clima () throws RemoteException {
-		
-	}
-	
-	public Clima (double temperatura, String descripcion) throws RemoteException {
-		this.temperatura = temperatura;
+	public Clima (float temperatura, String descripcion, Date ultimaCache) {
+		this.temperatura = temperatura-273;
 		this.descripcion = descripcion;
+		this.ultimaCache = ultimaCache;
 	}
 	
-	public void cachear () {
-		estaCacheada = true;
+	public Long obtenerFechaCache () {
+		if (ultimaCache == null)
+			return null;
+		return ultimaCache.getTime ();
 	}
 	
-	public boolean estaCacheada () {
-		return estaCacheada;
+	public float getTemperatura () {
+		return temperatura;
+	}
+	
+	public String getDesc () {
+		return descripcion;
 	}
 
 	@Override
 	public String toString() {
-		return "Temperatura: "+(temperatura-273)+", Descripcion: "+descripcion;
+		return "Temperatura: "+temperatura+", Descripcion: "+descripcion+ ", Ultima cache: "+ultimaCache.toString ();
 	}
 	
 	
