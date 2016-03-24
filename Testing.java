@@ -1,5 +1,7 @@
 import static org.junit.Assert.*;
 import java.rmi.RemoteException;
+import java.util.Calendar;
+import java.util.Date;
 import org.junit.Test;
 
 public class Testing {
@@ -27,5 +29,14 @@ public class Testing {
 	  assertNotNull (c);
 	  assertNotNull (c.obtenerFechaCache ());
   }
+  
+  @Test
+  public void probarCache () {
+	  Ciudad ciudad = new Ciudad (1, "ciudad_prueba", new Clima (10,"clima_prueba",new Date(100)));
+	  assertTrue (ciudad.revisarCache ());
+	  Ciudad ciudad2 = new Ciudad (2, "ciudad_prueba", new Clima (20,"clima_prueba",Calendar.getInstance ().getTime ()));
+	  assertFalse (ciudad2.revisarCache ());
+  }
+    
   
 } 

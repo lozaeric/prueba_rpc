@@ -14,6 +14,12 @@ public class Ciudad implements Serializable{
 		this.id = id;
 		this.nombre = nombre;
 	}
+	
+	public Ciudad (int id, String nombre, Clima clima) {
+		this.id = id;
+		this.nombre = nombre;
+		this.clima = clima;
+	}
 
 	public String getNombre() {
 		return nombre;
