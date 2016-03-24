@@ -8,7 +8,7 @@ public class Temporizador implements ActionListener {
 	
 	public Temporizador(Client cliente) {
 		this.cliente = cliente;
-		(new Timer(30000,this)).start();
+		(new Timer(60000,this)).start(); //cada minuto se revisa la fecha de los caches
 	}
 	public void actionPerformed(ActionEvent e) {
 		try {

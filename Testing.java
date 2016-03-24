@@ -27,7 +27,7 @@ public class Testing {
   public void consultarClima () {
 	  Clima c = Consultador.consultar (524901);
 	  assertNotNull (c);
-	  assertNotNull (c.obtenerFechaCache ());
+	  assertNotNull (c.obtenerDateCache ());
   }
   
   @Test

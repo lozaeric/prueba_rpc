@@ -14,10 +14,10 @@ public class Clima implements Serializable {
 		this.ultimaCache = ultimaCache;
 	}
 	
-	public Long obtenerFechaCache () {
+	public Date obtenerDateCache () {
 		if (ultimaCache == null)
 			return null;
-		return ultimaCache.getTime ();
+		return ultimaCache;
 	}
 	
 	public float getTemperatura () {

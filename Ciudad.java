@@ -43,7 +43,7 @@ public class Ciudad implements Serializable{
 	public boolean revisarCache () {
 		if (clima == null)
 			return false;
-		if (Calendar.getInstance ().getTime ().getTime ()-clima.obtenerFechaCache ()>7200000) { //7200 segundos
+		if (Calendar.getInstance ().getTime ().getTime ()-clima.obtenerDateCache ().getTime ()>7200000) { //7200 segundos - 2 hs
 			clima = null;
 			return true;
 		}

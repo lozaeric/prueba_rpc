@@ -17,10 +17,8 @@ import javax.swing.Timer;
 
 public class Client extends JFrame {
 	private OpenWeather ow;
-	private final JLabel id = new JLabel ("ID"), nombre = new JLabel ("Nombre"),
-					         temperatura = new JLabel ("Temperatura"), descripcion = new JLabel ("Descripcion");
-	private final JTextField campo_id = new JTextField (5), campo_nombre = new JTextField (8),
-									 campo_temperatura = new JTextField (4), campo_descripcion = new JTextField (7);
+	private final JTextField campo_id = new JTextField (5), campo_nombre = new JTextField (8), campo_fecha = new JTextField (16),
+									 campo_temperatura = new JTextField (4), campo_descripcion = new JTextField (8);
 	private final JComboBox<String> ciudades = new JComboBox<String> ();
 	private final JButton agregar = new JButton ("Agregar"), consultar  = new JButton ("Consultar"), verTodas  = new JButton ("Ver Todas");
 	
@@ -30,8 +28,10 @@ public class Client extends JFrame {
 		setDefaultCloseOperation (EXIT_ON_CLOSE);
 		setLayout (new FlowLayout ());
 		setLocation (150,250);
-		setSize (320,160);
+		setSize (330,160);
 		new Temporizador (this);
+      for (Ciudad c : ow.getCiudades ())
+    	  ciudades.addItem(String.valueOf (c.getId ()));
 		agregar.addActionListener(
 			new ActionListener () {
 				public void actionPerformed (ActionEvent e) {
@@ -55,6 +55,7 @@ public class Client extends JFrame {
 		                 DecimalFormat formato = new DecimalFormat("00.00");
 		                 campo_temperatura.setText (formato.format (c.getTemperatura ()));
 		                 campo_descripcion.setText (c.getDesc ());
+		                 campo_fecha.setText (c.obtenerDateCache ().toString ());
 	                 }
 	                 catch (Exception err) {
 		                 err.printStackTrace();
@@ -74,19 +75,24 @@ public class Client extends JFrame {
 					}
 				}
 			);
-		add (id);
+		campo_fecha.setEditable (false);
+		campo_descripcion.setEditable (false);
+		campo_temperatura.setEditable (false);
+		add (new JLabel ("ID"));
 		add (campo_id);
-		add (nombre);
+		add (new JLabel ("Nombre"));
 		add (campo_nombre);
 		add (agregar);
-		add (id);
+		add (new JLabel ("ID"));
 		add (ciudades);
 		add (consultar);
 		add (verTodas);
-		add (temperatura);
+		add (new JLabel ("Temperatura"));
 		add (campo_temperatura);
-		add (descripcion);
+		add (new JLabel ("Descripcion"));
 		add (campo_descripcion);
+		add (new JLabel ("Ultima Cache"));
+		add (campo_fecha);
  		setVisible (true);
 	}
 	
